@@ -1,0 +1,267 @@
+"use client";
+
+import { useState, useCallback } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { FadeIn } from "./animated-text";
+import { useModal } from "./modal-context";
+import PhoneCarousel from "./phone-carousel";
+
+interface WorkCardProps {
+  title: string;
+  role: string;
+  description: string;
+  cardTitle?: string;
+  impact: string;
+  tags: string[];
+  year: string;
+  image?: string;
+  phoneImage?: string;
+  phoneImages?: string[];
+  gradient: string;
+  index: number;
+  href?: string;
+  overlays?: React.ReactNode;
+}
+
+export default function WorkCard({
+  title,
+  role,
+  description,
+  impact,
+  tags,
+  year,
+  image,
+  phoneImage,
+  phoneImages,
+  gradient,
+  index,
+  href = "#",
+  overlays,
+  cardTitle,
+}: WorkCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const { isAnyModalOpen, openModalWith } = useModal();
+
+  const handleImageClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (image) {
+        e.preventDefault();
+        e.stopPropagation();
+        openModalWith(image, title, "");
+      }
+    },
+    [image, title, openModalWith]
+  );
+
+  const hasImage = !!image;
+  const hasPhone = !!phoneImage;
+  const hasCarousel = !!phoneImages && phoneImages.length > 0;
+  const isPhoneVideo =
+    !!phoneImage && /\.(mp4|webm|mov)$/i.test(phoneImage);
+
+  // Carousel cards have their own layout (rounded image card + control row below).
+  // The hover glass card is rendered inside PhoneCarousel so the arrows and dots
+  // remain usable, while still matching the hover pattern of the other cards.
+  if (hasCarousel) {
+    return (
+      <FadeIn delay={index * 0.15}>
+        <div className="group relative block">
+          <PhoneCarousel
+            images={phoneImages!}
+            title={title}
+            gradient={gradient}
+            cardTitle={cardTitle}
+            description={description}
+          />
+
+          {/* Impact line */}
+          <p className="mt-2 px-1 text-xs md:text-sm text-muted">{impact}</p>
+        </div>
+      </FadeIn>
+    );
+  }
+
+  return (
+    <FadeIn delay={index * 0.15}>
+      <div className="group relative block">
+        {/* Visual area: image or gradient */}
+        <div
+          className="relative w-full overflow-hidden rounded-2xl"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={hasImage ? handleImageClick : undefined}
+          style={{ cursor: hasImage ? "zoom-in" : "default" }}
+          data-hover="true"
+        >
+          {hasImage ? (
+            <div>
+              <Image
+                src={image}
+                alt={title}
+                width={1920}
+                height={1080}
+                className="h-auto w-full rounded-2xl"
+                sizes="(max-width: 768px) 100vw, 896px"
+                quality={100}
+                priority={index === 0}
+                unoptimized
+              />
+            </div>
+          ) : hasPhone ? (
+            <div
+              className="relative aspect-[16/10] flex items-center justify-center overflow-hidden"
+              style={{ background: gradient }}
+            >
+              {/* Ambient radial glow */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at center, rgba(255,255,255,0.12) 0%, transparent 60%)",
+                }}
+              />
+              {/* Phone frame */}
+              <div className="relative h-[88%] aspect-[676/1392]">
+                {/* Soft drop shadow under the device */}
+                <div
+                  className="absolute -inset-2 rounded-[1.25rem] blur-2xl opacity-60"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%)",
+                  }}
+                />
+                <div className="relative h-full w-full overflow-hidden rounded-[0.875rem] ring-1 ring-white/15 shadow-2xl bg-black">
+                  {isPhoneVideo ? (
+                    <video
+                      src={phoneImage}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
+                      className="h-full w-full object-contain"
+                    />
+                  ) : (
+                    <Image
+                      src={phoneImage!}
+                      alt={title}
+                      width={676}
+                      height={1392}
+                      className="h-full w-full object-contain"
+                      quality={100}
+                      priority={index === 0}
+                      unoptimized
+                    />
+                  )}
+                  {/* Subtle top highlight */}
+                  <div className="pointer-events-none absolute inset-0 rounded-[0.875rem] ring-1 ring-inset ring-white/10" />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div
+              className="aspect-[16/10]"
+              style={{ background: gradient }}
+            />
+          )}
+
+          {/* Animated overlays */}
+          {overlays}
+
+          {/* Subtle inner shadow for depth */}
+          <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+
+          {/* Bottom content: title always visible, glass + description on hover */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 rounded-b-2xl">
+            {/* Glass backdrop, fades in on hover */}
+            <div
+              className={`absolute inset-0 bg-white/15 backdrop-blur-xl backdrop-saturate-150 border-t border-white/4 rounded-b-2xl transition-opacity duration-200 ease-out ${
+                isHovered && !isAnyModalOpen ? "opacity-100" : "opacity-0"
+              }`}
+            />
+
+            {/* Text content */}
+            <div className="relative p-4 md:p-6">
+              {cardTitle && (
+                <h4
+                  className={`text-sm md:text-base font-semibold tracking-tight drop-shadow-sm transition-colors duration-200 ease-out ${
+                    isHovered && !isAnyModalOpen ? "text-white" : "text-white/80"
+                  }`}
+                >
+                  {cardTitle}
+                </h4>
+              )}
+
+              {/* Description, slides in on hover */}
+              <div
+                className={`overflow-hidden transition-all duration-200 ease-out ${
+                  isHovered && !isAnyModalOpen
+                    ? "max-h-40 opacity-100 mt-1.5"
+                    : "max-h-0 opacity-0 mt-0"
+                }`}
+              >
+                <p className="text-xs md:text-sm font-medium leading-relaxed text-white/90 drop-shadow-sm">
+                  {description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Image card overlay slides up from bottom */}
+          {(hasImage || hasPhone) && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 overflow-hidden rounded-b-2xl">
+              <div
+                className={`border-t border-white/4 bg-white/15 backdrop-blur-xl backdrop-saturate-150 p-4 md:p-6 transition-all duration-200 ease-out ${
+                  isHovered && !isAnyModalOpen
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-full opacity-0"
+                }`}
+              >
+                {cardTitle && (
+                  <h4 className="text-sm md:text-base font-semibold tracking-tight text-white drop-shadow-sm mb-1 md:mb-2">
+                    {cardTitle}
+                  </h4>
+                )}
+                <p className="text-xs md:text-sm font-medium leading-relaxed text-white/90 drop-shadow-sm">
+                  {description}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Impact line */}
+        <p className="mt-1.5 px-4 md:px-6 text-xs md:text-sm text-muted">
+          {impact}
+        </p>
+
+        {/* CTA, only show if there is a real link */}
+        {href && href !== "#" && (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 ml-auto flex items-center gap-1.5 text-sm font-medium text-foreground transition-opacity hover:opacity-70"
+            data-hover="true"
+          >
+            View case study
+            <svg
+              className="h-3 w-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+              />
+            </svg>
+          </a>
+        )}
+      </div>
+    </FadeIn>
+  );
+}
