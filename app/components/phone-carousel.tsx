@@ -97,15 +97,25 @@ export default function PhoneCarousel({
     });
   }, []);
 
+  // ESC closes lightbox globally (modal — always correct to close)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setLightboxOpen(false); return; }
+      if (e.key === "Escape") setLightboxOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // Arrow keys only active while this carousel is hovered
+  useEffect(() => {
+    if (!isHovered) return;
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") paginate(1);
       if (e.key === "ArrowLeft") paginate(-1);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [paginate]);
+  }, [isHovered, paginate]);
 
   useEffect(() => {
     document.body.style.overflow = lightboxOpen ? "hidden" : "";

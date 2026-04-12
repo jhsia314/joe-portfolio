@@ -21,12 +21,12 @@
 }
 
 [data-theme="dark"] {
-  --background: #0a0e1a;
-  --foreground: #f8fafc;
-  --muted: #94a3b8;
-  --accent: #b0bec9;
-  --border: #151d2e;
-  --hover-bg: #0f1524;
+  --background: #080b12;
+  --foreground: #f0f2f5;
+  --muted: #8892a4;
+  --accent: #a8b4c4;
+  --border: #12161f;
+  --hover-bg: #0d1019;
 }
 
 

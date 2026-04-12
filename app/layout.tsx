@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Joe Hsia, Design Executive",
+  title: "Joe Hsia, Design Leader",
   description:
     "22 years building products and design organizations at Google, Meta, Yahoo, and enterprise SaaS. Currently VP of Product Design at Safe Security.",
 };
@@ -36,6 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-theme="dark"
       className={`${satoshi.variable} ${geistMono.variable} h-full antialiased`}
     >
      <body className="min-h-full flex flex-col">

@@ -3,8 +3,6 @@
 import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import { LineReveal, FadeIn } from "./components/animated-text";
-import MagneticButton from "./components/magnetic-button";
-import StatusDot from "./components/status-dot";
 import Divider from "./components/divider";
 import TimeDisplay from "./components/time-display";
 import ThemeToggle from "./components/theme-toggle";
@@ -12,11 +10,81 @@ import WorkCard from "./components/work-card";
 import ProductTabs from "./components/product-tabs";
 import { ModalProvider, useModal } from "./components/modal-context";
 import ImageModal from "./components/image-modal";
+import InactivityLogout from "./components/inactivity-logout";
 
 const stats = [
   { value: "22 years", label: "Product & design leadership" },
   { value: "1B+ users", label: "Products shaped at scale" },
   { value: "40+ people", label: "Teams built & led" },
+];
+
+const principles = [
+  {
+    title: "Drive clarity",
+    description: "Turn ambiguity into direction teams can execute on",
+    outcome: "decisions happen early, not after rework",
+    icon: (
+      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h18M12 3l9 9-9 9" />
+      </svg>
+    ),
+  },
+  {
+    title: "Align teams",
+    description: "Unify product, design, and engineering around decisions",
+    outcome: "alignment replaces debate",
+    icon: (
+      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 12h18" />
+        <circle cx="12" cy="12" r="3" />
+        <circle cx="12" cy="3" r="1.5" />
+        <circle cx="12" cy="21" r="1.5" />
+        <circle cx="3" cy="12" r="1.5" />
+        <circle cx="21" cy="12" r="1.5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Scale systems",
+    description: "Build systems that outlive individual features",
+    outcome: "teams ship independently, not sequentially",
+    icon: (
+      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 20h12M6 16h12M6 12h12M6 8h12M6 4h12" />
+      </svg>
+    ),
+  },
+  {
+    title: "Increase fidelity",
+    description: "Bring ideas to life early through real product experiences",
+    outcome: "alignment happens on reality, not speculation",
+    icon: (
+      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Lead hands-on",
+    description: "Set direction and stay close enough to raise the bar",
+    outcome: "quality increases without slowing teams",
+    icon: (
+      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Drive through complexity",
+    description: "Operate through ambiguity and shifting priorities",
+    outcome: "progress continues without reset",
+    icon: (
+      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+      </svg>
+    ),
+  },
 ];
 
 // Dark backdrop — enterprise/dark-UI products (Safe, Yahoo, Meta social)
@@ -82,6 +150,7 @@ const companies = [
         impact: "200M+ users messaging inside Facebook within the first month of launch",
         gradient: DARK_BG,
         cardTheme: "dark" as const,
+        comingSoon: true,
       },
       {
         title: "Readers",
@@ -91,6 +160,7 @@ const companies = [
           "Unified cross-platform experience used by 500M+ daily active users",
         gradient: DARK_BG,
         cardTheme: "dark" as const,
+        comingSoon: true,
       },
     ],
   },
@@ -98,21 +168,6 @@ const companies = [
     name: "Google",
     role: "Senior UX Design Manager",
     products: [
-      {
-        title: "Google Pay",
-        cardTitle: "Google Pay",
-        description:
-          "Led the UX transition of Google China's NBU payments into Google Pay, consolidating fragmented experiences into a unified global platform. Drove end-to-end design across onboarding, payments, and core flows to ensure continuity and scalability.\n\nContributed to the launch of the Google Pay app in Singapore, adapting the product for local market needs and enabling a seamless payments experience for a new region.",
-        impact: "Launched Google Pay in Singapore; consolidated China NBU UX team into the global Google Payments team",
-        phoneImages: [
-          "/work/google-pay/hero.png",
-          "/work/google-pay/four-phones.webp",
-          "/work/google-pay/two-phones.webp",
-        ],
-        gradient: LIGHT_BG,
-        cardTheme: "light" as const,
-        showFades: false,
-      },
       {
         title: "Guess My Sketch",
         description:
@@ -148,6 +203,16 @@ const companies = [
         ],
         gradient: LIGHT_BG,
         cardTheme: "light" as const,
+      },
+      {
+        title: "Google Pay",
+        cardTitle: "Google Pay",
+        description:
+          "Led the UX transition of Google China's NBU payments into Google Pay, consolidating fragmented experiences into a unified global platform. Drove end-to-end design across onboarding, payments, and core flows to ensure continuity and scalability.\n\nContributed to the launch of the Google Pay app in Singapore, adapting the product for local market needs and enabling a seamless payments experience for a new region.",
+        impact: "Launched Google Pay in Singapore; consolidated China NBU UX team into the global Google Payments team",
+        gradient: LIGHT_BG,
+        cardTheme: "light" as const,
+        comingSoon: true,
       },
     ],
   },
@@ -226,7 +291,21 @@ function PageContent() {
         {/* ═══════════════ Header ═══════════════ */}
         <header className="flex items-center justify-between">
           <LineReveal>
-            <StatusDot />
+            <div className="flex items-center gap-2">
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  onClick={() => posthog.capture('contact_link_clicked', { label: link.label, href: link.href })}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-muted transition-colors hover:border-foreground hover:text-foreground"
+                >
+                  {link.icon}
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </LineReveal>
           <div className="flex items-center gap-4">
             <LineReveal delay={0.1}>
@@ -248,7 +327,7 @@ function PageContent() {
           <div className="mt-3 overflow-hidden">
             <LineReveal delay={0.5}>
               <span className="font-mono text-sm uppercase tracking-widest text-muted">
-                Design Executive, Consumer &amp; Enterprise
+                Design Leadership, Consumer &amp; Enterprise
               </span>
             </LineReveal>
           </div>
@@ -264,7 +343,7 @@ function PageContent() {
             </LineReveal>
             <LineReveal delay={0.7}>
               <p className="text-base md:text-lg leading-relaxed text-muted max-w-2xl">
-                Currently VP of Product Design at{" "}
+                Currently VP of Product Design and Creatives at{" "}
                 <motion.a
                   href="https://safe.security"
                   target="_blank"
@@ -299,6 +378,57 @@ function PageContent() {
               </div>
             </FadeIn>
           ))}
+        </section>
+
+        {/* ═══════════════ How I Lead ═══════════════ */}
+        <div className="mt-10">
+          <Divider />
+        </div>
+        <section className="mt-10">
+          <FadeIn>
+            <h2 className="font-mono text-xs uppercase tracking-widest text-muted/50">
+              How I Operate
+            </h2>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <p className="mt-3 text-sm leading-relaxed text-foreground/70 max-w-2xl">
+              Turn complexity into direction. Align teams around decisions. Drive execution that scales.
+            </p>
+          </FadeIn>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
+            {principles.map((p, i) => {
+              const isLeftCol = i % 2 === 0;
+              const isLastItem = i === principles.length - 1;
+              const isSecondToLast = i === principles.length - 2;
+              return (
+                <FadeIn key={p.title} delay={i * 0.05}>
+                  <div
+                    className={[
+                      "py-6",
+                      isLeftCol ? "md:pr-10 md:border-r border-foreground/[0.06]" : "md:pl-10",
+                      isLastItem
+                        ? ""
+                        : isSecondToLast
+                        ? "border-b border-foreground/[0.06] md:border-b-0"
+                        : "border-b border-foreground/[0.06]",
+                    ].join(" ")}
+                  >
+                    <h3 className="text-sm font-semibold tracking-tight text-foreground">
+                      {p.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted leading-snug">
+                      {p.description}
+                    </p>
+                    <div className="mt-2">
+                      <span className="inline-flex items-center rounded-full border border-foreground/[0.06] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-muted/70">
+                        {p.outcome}
+                      </span>
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            })}
+          </div>
         </section>
 
         {/* ═══════════════ Work ═══════════════ */}
@@ -341,45 +471,6 @@ function PageContent() {
           </section>
         ))}
 
-        {/* ═══════════════ Connect ═══════════════ */}
-        <div className="mt-10">
-          <Divider />
-        </div>
-        <section className="mt-10">
-          <FadeIn>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
-              Get in Touch
-            </h2>
-          </FadeIn>
-          <div className="mt-6 flex flex-wrap gap-3">
-            {links.map((link, i) => (
-              <FadeIn key={link.label} delay={i * 0.08 + 0.1}>
-                <MagneticButton
-                  href={link.href}
-                  className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-foreground hover:text-foreground"
-                  onClick={() => posthog.capture('contact_link_clicked', { label: link.label, href: link.href })}
-                >
-                  {link.icon}
-                  {link.label}
-                  <svg
-                    className="h-3 w-3 opacity-40"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M7 17L17 7M17 7H7M17 7v10"
-                    />
-                  </svg>
-                </MagneticButton>
-              </FadeIn>
-            ))}
-          </div>
-        </section>
-
         {/* ═══════════════ Footer ═══════════════ */}
         <footer className="mt-16 mb-8">
           <Divider />
@@ -420,6 +511,7 @@ function GlobalModal() {
 export default function Home() {
   return (
     <ModalProvider>
+      <InactivityLogout />
       <PageContent />
       <GlobalModal />
     </ModalProvider>

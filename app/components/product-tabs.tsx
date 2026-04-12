@@ -16,6 +16,7 @@ interface Product {
   image?: string;
   phoneImage?: string;
   phoneImages?: string[];
+  comingSoon?: boolean;
 }
 
 interface ProductTabsProps {
@@ -104,6 +105,7 @@ export default function ProductTabs({ products }: ProductTabsProps) {
             gradient={active.gradient}
             cardTheme={active.cardTheme}
             showFades={active.showFades}
+            comingSoon={active.comingSoon}
             tags={[]}
             year=""
             index={0}

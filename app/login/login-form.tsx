@@ -17,7 +17,6 @@ const errorCopy: Record<string, string> = {
 export default function LoginForm({ from, error }: LoginFormProps) {
   return (
     <main className="relative flex min-h-dvh flex-1 items-center justify-center overflow-hidden px-6 py-16">
-      {/* Ambient background wash that echoes the work cards */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-70"
@@ -33,23 +32,19 @@ export default function LoginForm({ from, error }: LoginFormProps) {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="relative w-full max-w-sm"
       >
-        {/* Card */}
         <div className="rounded-2xl border border-foreground/10 bg-background/60 p-8 shadow-2xl backdrop-blur-xl backdrop-saturate-150 md:p-10">
           <div className="mb-8 text-center">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
-              Private
-            </p>
-            <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground md:text-[28px]">
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground md:text-[28px]">
               Joe Hsia
             </h1>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              This portfolio is password-protected.
+              This work is shared selectively.
               <br />
-              Enter the password to continue.
+              Enter password or request access to continue.
             </p>
           </div>
 
-          <form action={login} className="space-y-3" onSubmit={() => posthog.capture('login_submitted')}>
+          <form action={login} className="space-y-3" onSubmit={() => posthog.capture("login_submitted")}>
             <input type="hidden" name="from" value={from} />
 
             <div className="relative">
@@ -84,11 +79,23 @@ export default function LoginForm({ from, error }: LoginFormProps) {
               </motion.p>
             )}
           </form>
+
+          {/* Divider */}
+          <div className="mt-6 flex items-center gap-3">
+            <div className="h-px flex-1 bg-foreground/8" />
+            <span className="text-[11px] text-muted/60">or</span>
+            <div className="h-px flex-1 bg-foreground/8" />
+          </div>
+
+          {/* Request access */}
+          <a
+            href="mailto:jhsia314@gmail.com"
+            className="mt-4 flex w-full items-center justify-center rounded-xl border border-foreground/10 bg-foreground/[0.03] px-4 py-3 text-sm text-muted transition-all duration-200 hover:border-foreground/20 hover:text-foreground"
+          >
+            Request access
+          </a>
         </div>
 
-        <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-muted/70">
-          Joe Hsia · Design Executive
-        </p>
       </motion.div>
     </main>
   );

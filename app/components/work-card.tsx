@@ -25,6 +25,7 @@ interface WorkCardProps {
   index: number;
   href?: string;
   overlays?: React.ReactNode;
+  comingSoon?: boolean;
 }
 
 export default function WorkCard({
@@ -44,6 +45,7 @@ export default function WorkCard({
   href = "#",
   overlays,
   cardTitle,
+  comingSoon = false,
 }: WorkCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const { isAnyModalOpen, openModalWith } = useModal();
@@ -169,9 +171,17 @@ export default function WorkCard({
             </div>
           ) : (
             <div
-              className="aspect-[16/10]"
+              className="relative aspect-[16/10] flex items-center justify-center"
               style={{ background: gradient }}
-            />
+            >
+              {comingSoon && (
+                <div className="flex flex-col items-center gap-3 select-none">
+                  <span className={`font-mono text-[11px] uppercase tracking-[0.25em] ${cardTheme === "light" ? "text-black/30" : "text-white/40"}`}>
+                    Coming Soon
+                  </span>
+                </div>
+              )}
+            </div>
           )}
 
           {/* Animated overlays */}
