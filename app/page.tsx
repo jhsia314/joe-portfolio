@@ -1,5 +1,6 @@
 "use client";
 
+import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import { LineReveal, FadeIn } from "./components/animated-text";
 import MagneticButton from "./components/magnetic-button";
@@ -18,6 +19,15 @@ const stats = [
   { value: "40+ people", label: "Teams built & led" },
 ];
 
+// Dark backdrop — enterprise/dark-UI products (Safe, Yahoo, Meta social)
+const DARK_BG =
+  "radial-gradient(ellipse at 50% 0%, #1a2036 0%, #0a0e1a 70%)";
+
+// Light backdrop — consumer/light-UI products (Facebook, Google apps)
+// Warm off-white so white screenshots dissolve naturally at the edges.
+const LIGHT_BG =
+  "radial-gradient(ellipse at 50% 100%, #f5f2ee 0%, #eceae7 70%)";
+
 const companies = [
   {
     name: "Safe Security",
@@ -30,8 +40,8 @@ const companies = [
         impact:
           "40% lift in platform engagement, directly tied to enterprise renewal pipeline",
         image: "/work/Safe_TPRM.png",
-        gradient:
-          "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+        gradient: DARK_BG,
+        cardTheme: "dark" as const,
       },
       {
         title: "SafeX",
@@ -46,17 +56,8 @@ const companies = [
           "/work/safex/4.png",
           "/work/safex/5.png",
         ],
-        gradient:
-          "linear-gradient(135deg, #0f0a1a 0%, #1a1033 50%, #2d1a4a 100%)",
-      },
-      {
-        title: "Continuous Threat Exposure Management",
-        description:
-          "Designed the end-to-end workflow for security teams to continuously monitor, prioritize, and remediate exposure gaps across their attack surface.",
-        impact:
-          "New product line contributing to enterprise pipeline expansion",
-        gradient:
-          "linear-gradient(135deg, #1a1a2e 0%, #1e293b 50%, #334155 100%)",
+        gradient: DARK_BG,
+        cardTheme: "dark" as const,
       },
     ],
   },
@@ -71,16 +72,16 @@ const companies = [
         impact:
           "10% increase in daily engagement across 2B+ users, launched in 16 countries",
         phoneImage: "/work/Facebook_TopOfFeed.mp4",
-        gradient:
-          "linear-gradient(135deg, #0a1d3a 0%, #0d2a52 50%, #142c5e 100%)",
+        gradient: LIGHT_BG,
+        cardTheme: "light" as const,
       },
       {
         title: "Messaging in Blue",
         description:
           "Led the strategy and design to bring messaging back inside the Facebook app as a first-class experience. Partnered with Research and Data Science to redefine how people communicate without leaving the app.",
         impact: "200M+ users messaging inside Facebook within the first month of launch",
-        gradient:
-          "linear-gradient(135deg, #00509e 0%, #0066cc 50%, #3388dd 100%)",
+        gradient: DARK_BG,
+        cardTheme: "dark" as const,
       },
       {
         title: "Readers",
@@ -88,54 +89,91 @@ const companies = [
           "Unified the story reading experience across Instagram and Facebook, solving for divergent interaction patterns while preserving what worked on each platform.",
         impact:
           "Unified cross-platform experience used by 500M+ daily active users",
-        gradient:
-          "linear-gradient(135deg, #833ab4 0%, #c13584 50%, #e1306c 100%)",
+        gradient: DARK_BG,
+        cardTheme: "dark" as const,
       },
     ],
   },
   {
     name: "Google",
-    role: "Design Lead",
+    role: "Senior UX Design Manager",
     products: [
       {
         title: "Google Pay",
+        cardTitle: "Google Pay",
         description:
-          "Simplified complex payment flows into clear, trustworthy experiences across mobile and web for both consumers and merchants.",
-        impact:
-          "Shipped globally across Android, iOS, and web",
-        gradient:
-          "linear-gradient(135deg, #174ea6 0%, #1a73e8 50%, #4285f4 100%)",
+          "Led the UX transition of Google China's NBU payments into Google Pay, consolidating fragmented experiences into a unified global platform. Drove end-to-end design across onboarding, payments, and core flows to ensure continuity and scalability.\n\nContributed to the launch of the Google Pay app in Singapore, adapting the product for local market needs and enabling a seamless payments experience for a new region.",
+        impact: "Launched Google Pay in Singapore; consolidated China NBU UX team into the global Google Payments team",
+        phoneImages: [
+          "/work/google-pay/hero.png",
+          "/work/google-pay/four-phones.webp",
+          "/work/google-pay/two-phones.webp",
+        ],
+        gradient: LIGHT_BG,
+        cardTheme: "light" as const,
+        showFades: false,
       },
       {
         title: "Guess My Sketch",
         description:
-          "Designed the end-to-end experience for an AI drawing game that used machine learning to recognize sketches in real-time, making Google AI playful and accessible.",
-        impact: "Showcased Google AI capabilities to millions of users",
-        gradient:
-          "linear-gradient(135deg, #0d652d 0%, #188038 50%, #34a853 100%)",
+          "Google needed a way to put AI into the hands of a billion people in China, on a platform it had never shipped on before. Led the Shanghai product and design team to build the first Google WeChat Mini Program from concept to launch in three months, a social drawing game where players sketched everyday objects for Google AI to guess. Six weeks later, shipped a live multiplayer Battle Royale mode on stage at Google Developer Day.",
+        impact:
+          "12.3M users in the first month, 100M+ sessions in six weeks, 1.5M DAU sustained, 63% of players associated the product with Google AI",
+        phoneImages: [
+          "/work/guess-my-sketch/5.png",
+          "/work/guess-my-sketch/9.png",
+          "/work/guess-my-sketch/7.png",
+          "/work/guess-my-sketch/8.png",
+          "/work/guess-my-sketch/6.png",
+          "/work/guess-my-sketch/10.png",
+          "/work/guess-my-sketch/11.png",
+        ],
+        gradient: LIGHT_BG,
+        cardTheme: "light" as const,
       },
       {
         title: "Smart Stories",
         description:
-          "Created a new content format that surfaced personalized information in a visual, swipeable experience, expanding how users discover content across Google's products.",
-        impact: "New content surface shipped across Google's consumer products",
-        gradient:
-          "linear-gradient(135deg, #b06000 0%, #ea8600 50%, #fbbc04 100%)",
+          "69 million children in China are left behind while parents work, and technology had become a wedge rather than a bond. Co-led the vision and design for a voice-driven storytelling app that turned speech into animated worlds, pairing natural language understanding with delightfully hand-drawn illustrations so parents and kids could spark creativity together. Sponsored external user research in China, drove 0-to-dogfood, and advocated for a global expansion beyond the China Next Billion Users launch.",
+        impact:
+          "New family-tech product direction for China NBU, expanded into a global initiative in partnership with Disney on launch content",
+        phoneImages: [
+          "/work/smart-stories/2.png",
+          "/work/smart-stories/9.png",
+          "/work/smart-stories/14.png",
+          "/work/smart-stories/13.png",
+          "/work/smart-stories/7.png",
+          "/work/smart-stories/10.png",
+          "/work/smart-stories/11.png",
+        ],
+        gradient: LIGHT_BG,
+        cardTheme: "light" as const,
       },
     ],
   },
   {
     name: "Yahoo",
-    role: "Senior Designer",
+    role: "Director of UX, APAC",
     products: [
       {
-        title: "FUJI Design Language System",
+        title: "FUJI Design System — Yahoo (Global, 18+ products)",
         description:
-          "Built Yahoo's unified design system from scratch, defining the visual language, component architecture, and interaction patterns adopted across every product in the portfolio.",
+          "Built Yahoo's global design system from the ground up, unifying design across mobile, web, and tablet. Defined core principles, created a scalable color architecture, and introduced the \"Orb\" visual identity adopted across 18+ verticals.\n\nShipped a full component library, motion system, and documentation platform — driving consistent UX across Mail, News, Finance, Sports, Messenger, and APAC products.",
         impact:
-          "Adopted across all Yahoo products, serving 700M+ monthly users",
-        gradient:
-          "linear-gradient(135deg, #3b0a6b 0%, #5f17a8 50%, #7b1fa2 100%)",
+          "~70% adoption across all Yahoo products within one year, +24% engagement across News, Sports, Finance, and E-Commerce, +64% feed engagement",
+        phoneImages: [
+          "/work/fuji/slide-2.png",
+          "/work/fuji/slide-5.png",
+          "/work/fuji/slide-7.png",
+          "/work/fuji/slide-13.png",
+          "/work/fuji/slide-19.png",
+          "/work/fuji/slide-24.png",
+          "/work/fuji/slide-44.png",
+          "/work/fuji/slide-48.png",
+        ],
+        gradient: DARK_BG,
+        cardTheme: "dark" as const,
+        showFades: false,
       },
     ],
   },
@@ -289,7 +327,10 @@ function PageContent() {
                 description={company.products[0].description}
                 impact={company.products[0].impact}
                 image={(company.products[0] as { image?: string }).image}
+                phoneImages={(company.products[0] as { phoneImages?: string[] }).phoneImages}
                 gradient={company.products[0].gradient}
+                cardTheme={(company.products[0] as { cardTheme?: "dark" | "light" }).cardTheme}
+                showFades={(company.products[0] as { showFades?: boolean }).showFades}
                 tags={[]}
                 year=""
                 index={0}
@@ -316,6 +357,7 @@ function PageContent() {
                 <MagneticButton
                   href={link.href}
                   className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-foreground hover:text-foreground"
+                  onClick={() => posthog.capture('contact_link_clicked', { label: link.label, href: link.href })}
                 >
                   {link.icon}
                   {link.label}

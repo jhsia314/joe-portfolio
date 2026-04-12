@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "portfolio",
-      "runtimeExecutable": "/usr/local/bin/node",
-      "runtimeArgs": ["/usr/local/bin/npx", "next", "dev"],
-      "port": 3000
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "cd /Users/joe/Desktop/Portfolio && npm run dev -- --port 3100"],
+      "port": 3100
     }
   ]
 }

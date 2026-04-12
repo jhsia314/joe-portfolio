@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import posthog from "posthog-js";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ThemeToggle() {
@@ -21,6 +22,7 @@ export default function ThemeToggle() {
     setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("theme", next);
+    posthog.capture('theme_toggled', { theme: next });
   };
 
   if (!mounted) return <div className="h-8 w-8" />;

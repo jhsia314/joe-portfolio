@@ -1,14 +1,18 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import posthog from "posthog-js";
 import { motion, AnimatePresence } from "framer-motion";
 import WorkCard from "./work-card";
 
 interface Product {
   title: string;
+  cardTitle?: string;
   description: string;
   impact: string;
   gradient: string;
+  cardTheme?: "dark" | "light";
+  showFades?: boolean;
   image?: string;
   phoneImage?: string;
   phoneImages?: string[];
@@ -41,22 +45,20 @@ export default function ProductTabs({ products }: ProductTabsProps) {
 
   const handleTabClick = (i: number) => {
     setActiveIndex(i);
+    posthog.capture('product_tab_switched', { tab: products[i].title, index: i });
   };
 
   return (
     <div>
-      {/* Pill tab bar */}
+      {/* Pill tab bar — inline, sizes to content */}
       <div
         ref={containerRef}
-        className="relative inline-flex items-center gap-0.5 rounded-full bg-foreground/[0.04] p-1 mb-6"
+        className="relative inline-flex rounded-full bg-foreground/[0.04] p-1 mb-6 overflow-hidden"
       >
         {/* Sliding pill background */}
         <motion.div
-          className="absolute top-1 bottom-1 rounded-full bg-foreground/[0.08]"
-          animate={{
-            left: pillStyle.left,
-            width: pillStyle.width,
-          }}
+          className="absolute top-1 bottom-1 rounded-lg md:rounded-full bg-foreground/[0.08]"
+          animate={{ left: pillStyle.left, width: pillStyle.width }}
           transition={{ type: "spring", stiffness: 350, damping: 30 }}
         />
 
@@ -92,7 +94,7 @@ export default function ProductTabs({ products }: ProductTabsProps) {
         >
           <WorkCard
             title={active.title}
-            cardTitle={active.title}
+            cardTitle={active.cardTitle ?? active.title}
             role=""
             description={active.description}
             impact={active.impact}
@@ -100,6 +102,8 @@ export default function ProductTabs({ products }: ProductTabsProps) {
             phoneImage={active.phoneImage}
             phoneImages={active.phoneImages}
             gradient={active.gradient}
+            cardTheme={active.cardTheme}
+            showFades={active.showFades}
             tags={[]}
             year=""
             index={0}

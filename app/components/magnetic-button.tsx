@@ -8,6 +8,7 @@ interface MagneticButtonProps {
   className?: string;
   href?: string;
   strength?: number;
+  onClick?: () => void;
 }
 
 export default function MagneticButton({
@@ -15,6 +16,7 @@ export default function MagneticButton({
   className = "",
   href,
   strength = 0.3,
+  onClick,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -41,6 +43,7 @@ export default function MagneticButton({
       className={className}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
+      onClick={onClick}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 350, damping: 15, mass: 0.2 }}
       data-hover="true"

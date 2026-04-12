@@ -1,5 +1,6 @@
 "use client";
 
+import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import { login } from "./actions";
 
@@ -48,7 +49,7 @@ export default function LoginForm({ from, error }: LoginFormProps) {
             </p>
           </div>
 
-          <form action={login} className="space-y-3">
+          <form action={login} className="space-y-3" onSubmit={() => posthog.capture('login_submitted')}>
             <input type="hidden" name="from" value={from} />
 
             <div className="relative">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import posthog from "posthog-js";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FadeIn } from "./animated-text";
@@ -19,6 +20,8 @@ interface WorkCardProps {
   phoneImage?: string;
   phoneImages?: string[];
   gradient: string;
+  cardTheme?: "dark" | "light";
+  showFades?: boolean;
   index: number;
   href?: string;
   overlays?: React.ReactNode;
@@ -35,6 +38,8 @@ export default function WorkCard({
   phoneImage,
   phoneImages,
   gradient,
+  cardTheme = "dark",
+  showFades = true,
   index,
   href = "#",
   overlays,
@@ -49,6 +54,7 @@ export default function WorkCard({
         e.preventDefault();
         e.stopPropagation();
         openModalWith(image, title, "");
+        posthog.capture('work_image_opened', { title });
       }
     },
     [image, title, openModalWith]
@@ -71,6 +77,8 @@ export default function WorkCard({
             images={phoneImages!}
             title={title}
             gradient={gradient}
+            cardTheme={cardTheme}
+            showFades={showFades}
             cardTitle={cardTitle}
             description={description}
           />
@@ -172,67 +180,35 @@ export default function WorkCard({
           {/* Subtle inner shadow for depth */}
           <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
 
-          {/* Bottom content: title always visible, glass + description on hover */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 rounded-b-2xl">
-            {/* Glass backdrop, fades in on hover */}
-            <div
-              className={`absolute inset-0 bg-white/15 backdrop-blur-xl backdrop-saturate-150 border-t border-white/4 rounded-b-2xl transition-opacity duration-200 ease-out ${
-                isHovered && !isAnyModalOpen ? "opacity-100" : "opacity-0"
-              }`}
-            />
-
-            {/* Text content */}
-            <div className="relative p-4 md:p-6">
-              {cardTitle && (
-                <h4
-                  className={`text-sm md:text-base font-semibold tracking-tight drop-shadow-sm transition-colors duration-200 ease-out ${
-                    isHovered && !isAnyModalOpen ? "text-white" : "text-white/80"
-                  }`}
-                >
-                  {cardTitle}
-                </h4>
-              )}
-
-              {/* Description, slides in on hover */}
-              <div
-                className={`overflow-hidden transition-all duration-200 ease-out ${
-                  isHovered && !isAnyModalOpen
-                    ? "max-h-40 opacity-100 mt-1.5"
-                    : "max-h-0 opacity-0 mt-0"
-                }`}
-              >
-                <p className="text-xs md:text-sm font-medium leading-relaxed text-white/90 drop-shadow-sm">
-                  {description}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Image card overlay slides up from bottom */}
-          {(hasImage || hasPhone) && (
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 overflow-hidden rounded-b-2xl">
-              <div
-                className={`border-t border-white/4 bg-white/15 backdrop-blur-xl backdrop-saturate-150 p-4 md:p-6 transition-all duration-200 ease-out ${
-                  isHovered && !isAnyModalOpen
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-full opacity-0"
-                }`}
-              >
-                {cardTitle && (
-                  <h4 className="text-sm md:text-base font-semibold tracking-tight text-white drop-shadow-sm mb-1 md:mb-2">
-                    {cardTitle}
-                  </h4>
-                )}
-                <p className="text-xs md:text-sm font-medium leading-relaxed text-white/90 drop-shadow-sm">
-                  {description}
-                </p>
-              </div>
-            </div>
-          )}
+          {/* Subtle bottom gradient for depth only */}
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-16 rounded-b-2xl"
+            style={{
+              background: cardTheme === "light"
+                ? "linear-gradient(to top, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)"
+                : "linear-gradient(to top, rgba(10,14,26,0.5) 0%, rgba(10,14,26,0) 100%)",
+            }}
+          />
         </div>
 
+        {/* Title + description below card */}
+        {(cardTitle || description) && (
+          <div className="mt-3 px-1">
+            {cardTitle && (
+              <h4 className="text-sm md:text-base font-semibold tracking-tight text-foreground">
+                {cardTitle}
+              </h4>
+            )}
+            {description && (
+              <p className="mt-1 text-xs md:text-sm text-muted leading-relaxed">
+                {description}
+              </p>
+            )}
+          </div>
+        )}
+
         {/* Impact line */}
-        <p className="mt-1.5 px-4 md:px-6 text-xs md:text-sm text-muted">
+        <p className="mt-1.5 px-1 text-xs md:text-sm text-muted">
           {impact}
         </p>
 
