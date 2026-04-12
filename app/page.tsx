@@ -369,7 +369,7 @@ function PageContent() {
           {stats.map((stat, i) => (
             <FadeIn key={stat.label} delay={i * 0.1}>
               <div>
-                <span className="text-2xl md:text-3xl font-medium tracking-tight text-foreground">
+                <span className="text-lg md:text-3xl font-medium tracking-tight text-foreground">
                   {stat.value}
                 </span>
                 <p className="mt-1 font-mono text-xs uppercase tracking-wider text-muted">

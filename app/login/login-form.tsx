@@ -44,7 +44,7 @@ export default function LoginForm({ from, error }: LoginFormProps) {
             </p>
           </div>
 
-          <form action={login} className="space-y-3" onSubmit={() => posthog.capture("login_submitted")}>
+          <form action={login} className="space-y-3" onSubmit={() => { try { posthog.capture("login_submitted"); } catch {} }}>
             <input type="hidden" name="from" value={from} />
 
             <div className="relative">
