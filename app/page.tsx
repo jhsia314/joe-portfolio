@@ -15,7 +15,7 @@ import InactivityLogout from "./components/inactivity-logout";
 const stats = [
   { value: "22 years", label: "Product & design leadership" },
   { value: "1B+ users", label: "Products shaped at scale" },
-  { value: "40+ people", label: "Teams built & led" },
+  { value: "40-person", label: "Largest team built & led" },
 ];
 
 const principles = [
