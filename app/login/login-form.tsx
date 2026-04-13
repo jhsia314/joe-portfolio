@@ -16,7 +16,7 @@ const errorCopy: Record<string, string> = {
 
 export default function LoginForm({ from, error }: LoginFormProps) {
   return (
-    <main className="relative flex min-h-dvh flex-1 items-center justify-center overflow-hidden px-6 py-16">
+    <main className="relative flex min-h-dvh flex-1 items-center justify-center overflow-hidden bg-background px-6 py-16">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-70"
@@ -34,10 +34,10 @@ export default function LoginForm({ from, error }: LoginFormProps) {
       >
         <div className="rounded-2xl border border-foreground/10 bg-background/60 p-8 shadow-2xl backdrop-blur-xl backdrop-saturate-150 md:p-10">
           <div className="mb-8 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground md:text-[28px]">
+            <h1 className="text-[26px] font-semibold tracking-tight text-foreground md:text-[30px]">
               Joe Hsia
             </h1>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
+            <p className="mt-2 text-[15px] leading-relaxed text-muted">
               This work is shared selectively.
               <br />
               Enter password or request access to continue.
@@ -56,14 +56,14 @@ export default function LoginForm({ from, error }: LoginFormProps) {
                 autoComplete="current-password"
                 placeholder="Password"
                 aria-label="Password"
-                className="w-full rounded-xl border border-foreground/10 bg-foreground/[0.03] px-4 py-3 text-sm text-foreground placeholder:text-muted/60 outline-none transition-all duration-200 focus:border-foreground/30 focus:bg-foreground/[0.06] focus:ring-2 focus:ring-foreground/10"
+                className="w-full rounded-xl border border-foreground/10 bg-foreground/[0.03] px-4 py-3 text-[15px] text-foreground placeholder:text-muted/60 outline-none transition-all duration-200 focus:border-foreground/30 focus:bg-foreground/[0.06] focus:ring-2 focus:ring-foreground/10"
               />
             </div>
 
             <button
               type="submit"
               data-hover="true"
-              className="group relative w-full overflow-hidden rounded-xl bg-foreground px-4 py-3 text-sm font-medium tracking-tight text-background transition-all duration-200 hover:opacity-90 active:scale-[0.99]"
+              className="group relative w-full overflow-hidden rounded-xl bg-foreground px-4 py-3 text-[15px] font-medium tracking-tight text-background transition-all duration-200 hover:opacity-90 active:scale-[0.99]"
             >
               <span className="relative z-10">Enter</span>
             </button>
@@ -90,7 +90,7 @@ export default function LoginForm({ from, error }: LoginFormProps) {
           {/* Request access */}
           <a
             href="mailto:jhsia314@gmail.com"
-            className="mt-4 flex w-full items-center justify-center rounded-xl border border-foreground/10 bg-foreground/[0.03] px-4 py-3 text-sm text-muted transition-all duration-200 hover:border-foreground/20 hover:text-foreground"
+            className="mt-4 flex w-full items-center justify-center rounded-xl border border-foreground/10 bg-foreground/[0.03] px-4 py-3 text-[15px] text-muted transition-all duration-200 hover:border-foreground/20 hover:text-foreground"
           >
             Request access
           </a>
