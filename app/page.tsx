@@ -136,7 +136,7 @@ const companies = [
       {
         title: "Clinical Studies Platform",
         description:
-          "Verily's Clinical Studies Platform sits at the intersection of clinical research, data science, and participant experience — a domain where design had almost no precedent and very high stakes. Led the 0-to-1 UX build for a platform that orchestrates the full lifecycle of a clinical study: participant recruitment, data collection, researcher workflows, and regulatory reporting.\n\nBuilt and led a 20-person UX org — senior managers, ICs, and researchers — from the ground up, embedding design into platform and systems thinking across data, research, and participant workflows. Introduced design sprints and rapid prototyping to shift engineering cadence and accelerate decision-making.",
+          "Verily's Clinical Studies Platform sits at the intersection of clinical research, data science, and participant experience — a domain where design had almost no precedent and very high stakes. Led the 0-to-1 UX build for a platform that orchestrates the full lifecycle of a clinical study: participant recruitment, data collection, researcher workflows, and regulatory reporting. Built and led a 20-person UX org from the ground up, embedding design into platform and systems thinking across data, research, and participant workflows. Introduced design sprints and rapid prototyping to shift engineering cadence and accelerate decision-making.",
         impact:
           "Built Verily's UX practice from zero, scaling to 20 people and shipping the foundational Clinical Studies Platform across multiple active research programs",
         gradient: DARK_BG,
@@ -146,7 +146,7 @@ const companies = [
       {
         title: "Vision & Storytelling",
         description:
-          "Clinical and regulatory audiences don't default to trusting design. Crafted and evangelized a 3-year product vision, aligning design, product, and engineering around a shared north star at one of Alphabet's most complex and regulated organizations.\n\nChampioned a storytelling culture that reframed design's role — from pixel-level execution to strategic influence. This approach earned sustained buy-in from regulatory, clinical, and executive stakeholders, and became the foundation for how the design org earned its seat at the table.",
+          "Clinical and regulatory audiences don't default to trusting design. Crafted and evangelized a 3-year product vision, aligning design, product, and engineering around a shared north star at one of Alphabet's most complex and regulated organizations. Championed a storytelling culture that reframed design's role from pixel-level execution to strategic influence — earning sustained buy-in from regulatory, clinical, and executive stakeholders, and becoming the foundation for how the design org earned its seat at the table.",
         impact:
           "3-year product vision adopted across design, product, and engineering; storytelling practice recognized as a driver of executive and cross-functional alignment",
         gradient: DARK_BG,
@@ -234,7 +234,7 @@ const companies = [
         title: "Google Pay",
         cardTitle: "Google Pay",
         description:
-          "Led the UX transition of Google China's NBU payments into Google Pay, consolidating fragmented experiences into a unified global platform. Drove end-to-end design across onboarding, payments, and core flows to ensure continuity and scalability.\n\nContributed to the launch of the Google Pay app in Singapore, adapting the product for local market needs and enabling a seamless payments experience for a new region.",
+          "Led the UX transition of Google China's NBU payments into Google Pay, consolidating fragmented experiences into a unified global platform. Drove end-to-end design across onboarding, payments, and core flows to ensure continuity and scalability. Contributed to the launch of the Google Pay app in Singapore, adapting the product for local market needs and enabling a seamless payments experience for a new region.",
         impact: "Launched Google Pay in Singapore; consolidated China NBU UX team into the global Google Payments team",
         gradient: LIGHT_BG,
         cardTheme: "light" as const,
@@ -249,7 +249,7 @@ const companies = [
       {
         title: "FUJI Design System — Yahoo (Global, 18+ products)",
         description:
-          "Built Yahoo's global design system from the ground up, unifying design across mobile, web, and tablet. Defined core principles, created a scalable color architecture, and introduced the \"Orb\" visual identity adopted across 18+ verticals.\n\nShipped a full component library, motion system, and documentation platform — driving consistent UX across Mail, News, Finance, Sports, Messenger, and APAC products.",
+          "Built Yahoo's global design system from the ground up, unifying design across mobile, web, and tablet. Defined core principles, created a scalable color architecture, and introduced the \"Orb\" visual identity adopted across 18+ verticals. Shipped a full component library, motion system, and documentation platform — driving consistent UX across Mail, News, Finance, Sports, Messenger, and APAC products.",
         impact:
           "~70% adoption across all Yahoo products within one year, +24% engagement across News, Sports, Finance, and E-Commerce, +64% feed engagement",
         phoneImages: [
