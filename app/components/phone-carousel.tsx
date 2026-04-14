@@ -217,11 +217,13 @@ export default function PhoneCarousel({
           </svg>
         </button>
 
-        {/* Subtle bottom gradient for depth only */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 rounded-b-2xl z-20"
-          style={{ background: theme.scrim }}
-        />
+        {/* Subtle bottom gradient for depth only — skip for landscape slides */}
+        {showFades && (
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-16 rounded-b-2xl z-20"
+            style={{ background: theme.scrim }}
+          />
+        )}
 
         {/* Inner ring for depth */}
         <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
