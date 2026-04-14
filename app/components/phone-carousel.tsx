@@ -136,7 +136,7 @@ export default function PhoneCarousel({
     <div>
       {/* ── Card — same shape and scrim as every other WorkCard ─────────── */}
       <div
-        className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl select-none"
+        className={`relative w-full ${showFades ? "aspect-[16/10]" : "aspect-[16/9]"} overflow-hidden rounded-2xl select-none`}
         style={{ background: gradient }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

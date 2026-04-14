@@ -140,7 +140,6 @@ const companies = [
         impact:
           "3-year product vision adopted across design, product, and engineering; storytelling practice recognized as a driver of executive and cross-functional alignment",
         phoneImages: [
-          "/work/verily/vision/slide-01.jpg",
           "/work/verily/vision/slide-03.jpg",
           "/work/verily/vision/slide-04.jpg",
           "/work/verily/vision/slide-11.jpg",
@@ -162,7 +161,6 @@ const companies = [
         impact:
           "Built Verily's UX practice from zero, scaling to 20 people and shipping the foundational Clinical Studies Platform across multiple active research programs",
         phoneImages: [
-          "/work/verily/e2e/slide-01.jpg",
           "/work/verily/e2e/slide-04.jpg",
           "/work/verily/e2e/slide-08.jpg",
           "/work/verily/e2e/slide-16.jpg",
