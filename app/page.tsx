@@ -192,16 +192,7 @@ const companies = [
         cardTheme: "light" as const,
       },
       {
-        title: "Messaging in Blue",
-        description:
-          "Led the strategy and design to bring messaging back inside the Facebook app as a first-class experience. Partnered with Research and Data Science to redefine how people communicate without leaving the app.",
-        impact: "200M+ users messaging inside Facebook within the first month of launch",
-        gradient: DARK_BG,
-        cardTheme: "dark" as const,
-        comingSoon: true,
-      },
-      {
-        title: "Readers",
+        title: "Reader",
         description:
           "Unified the story reading experience across Instagram and Facebook, solving for divergent interaction patterns while preserving what worked on each platform.",
         impact:
@@ -221,6 +212,15 @@ const companies = [
         gradient: LIGHT_BG,
         cardTheme: "light" as const,
         showFades: false,
+      },
+      {
+        title: "Messaging in Blue",
+        description:
+          "Led the strategy and design to bring messaging back inside the Facebook app as a first-class experience. Partnered with Research and Data Science to redefine how people communicate without leaving the app.",
+        impact: "200M+ users messaging inside Facebook within the first month of launch",
+        gradient: DARK_BG,
+        cardTheme: "dark" as const,
+        comingSoon: true,
       },
     ],
   },
