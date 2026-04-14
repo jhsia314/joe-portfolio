@@ -156,7 +156,7 @@ export default function PhoneCarousel({
             <img
               src={images[index]}
               alt={`${title} screen ${index + 1}`}
-              className={`pointer-events-none ${showFades ? "h-full w-auto object-contain" : "h-full w-full object-cover"}`}
+              className={`pointer-events-none ${showFades ? "h-full w-auto object-contain" : "w-full h-full object-contain"}`}
               draggable={false}
               loading={index === 0 ? "eager" : "lazy"}
               decoding="async"
