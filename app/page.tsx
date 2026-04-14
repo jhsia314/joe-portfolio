@@ -130,6 +130,32 @@ const companies = [
     ],
   },
   {
+    name: "Verily (Alphabet)",
+    role: "Head of UX, Clinical Studies Platform",
+    products: [
+      {
+        title: "Clinical Studies Platform",
+        description:
+          "Verily's Clinical Studies Platform sits at the intersection of clinical research, data science, and participant experience — a domain where design had almost no precedent and very high stakes. Led the 0-to-1 UX build for a platform that orchestrates the full lifecycle of a clinical study: participant recruitment, data collection, researcher workflows, and regulatory reporting.\n\nBuilt and led a 20-person UX org — senior managers, ICs, and researchers — from the ground up, embedding design into platform and systems thinking across data, research, and participant workflows. Introduced design sprints and rapid prototyping to shift engineering cadence and accelerate decision-making.",
+        impact:
+          "Built Verily's UX practice from zero, scaling to 20 people and shipping the foundational Clinical Studies Platform across multiple active research programs",
+        gradient: DARK_BG,
+        cardTheme: "dark" as const,
+        comingSoon: true,
+      },
+      {
+        title: "Vision & Storytelling",
+        description:
+          "Clinical and regulatory audiences don't default to trusting design. Crafted and evangelized a 3-year product vision, aligning design, product, and engineering around a shared north star at one of Alphabet's most complex and regulated organizations.\n\nChampioned a storytelling culture that reframed design's role — from pixel-level execution to strategic influence. This approach earned sustained buy-in from regulatory, clinical, and executive stakeholders, and became the foundation for how the design org earned its seat at the table.",
+        impact:
+          "3-year product vision adopted across design, product, and engineering; storytelling practice recognized as a driver of executive and cross-functional alignment",
+        gradient: DARK_BG,
+        cardTheme: "dark" as const,
+        comingSoon: true,
+      },
+    ],
+  },
+  {
     name: "Meta",
     role: "Product Design Leader, Family of Apps",
     products: [
