@@ -469,13 +469,13 @@ function PageContent() {
               >
                 How I Operate
               </motion.h2>
-              <motion.span
-                animate={{ opacity: principlesOpen ? 0.4 : 0.5, rotate: principlesOpen ? 45 : 0 }}
+              <motion.div
+                animate={{ rotate: principlesOpen ? 45 : 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="text-lg text-muted select-none"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/15 bg-foreground/5 text-foreground/50 select-none transition-colors group-hover:border-foreground/30 group-hover:bg-foreground/10 group-hover:text-foreground/80"
               >
-                +
-              </motion.span>
+                <span className="text-xl leading-none">+</span>
+              </motion.div>
             </button>
             <motion.p
               animate={{ opacity: principlesOpen ? 0 : 1, height: principlesOpen ? 0 : "auto" }}
