@@ -450,18 +450,18 @@ function PageContent() {
           <FadeIn>
             <button
               onClick={() => setPrinciplesOpen(!principlesOpen)}
-              className="flex w-full items-start justify-between group"
+              className="flex w-full items-center justify-between group"
             >
               <motion.h2
                 animate={principlesOpen ? {
                   fontSize: "0.7rem",
                   fontWeight: 400,
-                  letterSpacing: "0.15em",
+                  letterSpacing: "0.08em",
                   opacity: 0.4,
                 } : {
                   fontSize: "1.25rem",
                   fontWeight: 600,
-                  letterSpacing: "-0.02em",
+                  letterSpacing: "-0.04em",
                   opacity: 1,
                 }}
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
@@ -469,13 +469,6 @@ function PageContent() {
               >
                 How I Operate
               </motion.h2>
-              <motion.p
-                animate={{ opacity: principlesOpen ? 0 : 1, height: principlesOpen ? 0 : "auto" }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-1 text-sm text-muted overflow-hidden"
-              >
-                The principles behind how I lead and build.
-              </motion.p>
               <motion.span
                 animate={{ opacity: principlesOpen ? 0.4 : 0.5, rotate: principlesOpen ? 45 : 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
@@ -484,6 +477,13 @@ function PageContent() {
                 +
               </motion.span>
             </button>
+            <motion.p
+              animate={{ opacity: principlesOpen ? 0 : 1, height: principlesOpen ? 0 : "auto" }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-1 text-sm text-muted overflow-hidden"
+            >
+              The principles behind how I lead and build — turning complexity into direction, aligning teams around decisions, driving execution that scales.
+            </motion.p>
           </FadeIn>
           <motion.div
             initial={false}
@@ -491,9 +491,6 @@ function PageContent() {
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             style={{ overflow: "hidden" }}
           >
-            <p className="mt-3 text-sm leading-relaxed text-foreground/70 max-w-2xl">
-              Turn complexity into direction. Align teams around decisions. Drive execution that scales.
-            </p>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
               {principles.map((p, i) => {
                 const isLeftCol = i % 2 === 0;
