@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import { LineReveal, FadeIn } from "./components/animated-text";
@@ -337,6 +338,7 @@ const links = [
 
 function PageContent() {
   const { isAnyModalOpen } = useModal();
+  const [principlesOpen, setPrinciplesOpen] = React.useState(false);
 
   return (
     <>
@@ -446,23 +448,35 @@ function PageContent() {
         </div>
         <section className="mt-10">
           <FadeIn>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted/50">
-              How I Operate
-            </h2>
+            <button
+              onClick={() => setPrinciplesOpen(!principlesOpen)}
+              className="flex w-full items-center justify-between group"
+            >
+              <h2 className="font-mono text-xs uppercase tracking-widest text-muted/50">
+                How I Operate
+              </h2>
+              <span className="font-mono text-xs text-muted/40 transition-colors group-hover:text-muted select-none">
+                {principlesOpen ? "−" : "+"}
+              </span>
+            </button>
           </FadeIn>
-          <FadeIn delay={0.1}>
+          <motion.div
+            initial={false}
+            animate={{ height: principlesOpen ? "auto" : 0, opacity: principlesOpen ? 1 : 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            style={{ overflow: "hidden" }}
+          >
             <p className="mt-3 text-sm leading-relaxed text-foreground/70 max-w-2xl">
               Turn complexity into direction. Align teams around decisions. Drive execution that scales.
             </p>
-          </FadeIn>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
-            {principles.map((p, i) => {
-              const isLeftCol = i % 2 === 0;
-              const isLastItem = i === principles.length - 1;
-              const isSecondToLast = i === principles.length - 2;
-              return (
-                <FadeIn key={p.title} delay={i * 0.05}>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
+              {principles.map((p, i) => {
+                const isLeftCol = i % 2 === 0;
+                const isLastItem = i === principles.length - 1;
+                const isSecondToLast = i === principles.length - 2;
+                return (
                   <div
+                    key={p.title}
                     className={[
                       "py-6",
                       isLeftCol ? "md:pr-10 md:border-r border-foreground/[0.06]" : "md:pl-10",
@@ -485,10 +499,10 @@ function PageContent() {
                       </span>
                     </div>
                   </div>
-                </FadeIn>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </motion.div>
         </section>
 
         {/* ═══════════════ Work ═══════════════ */}
