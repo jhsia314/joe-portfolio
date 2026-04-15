@@ -450,7 +450,7 @@ function PageContent() {
           <FadeIn>
             <button
               onClick={() => setPrinciplesOpen(!principlesOpen)}
-              className="flex w-full items-center justify-between group"
+              className="flex w-full items-start justify-between group"
             >
               <motion.h2
                 animate={principlesOpen ? {
@@ -469,6 +469,13 @@ function PageContent() {
               >
                 How I Operate
               </motion.h2>
+              <motion.p
+                animate={{ opacity: principlesOpen ? 0 : 1, height: principlesOpen ? 0 : "auto" }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-1 text-sm text-muted overflow-hidden"
+              >
+                The principles behind how I lead and build.
+              </motion.p>
               <motion.span
                 animate={{ opacity: principlesOpen ? 0.4 : 0.5, rotate: principlesOpen ? 45 : 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
