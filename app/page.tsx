@@ -472,7 +472,7 @@ function PageContent() {
               <motion.div
                 animate={{ rotate: principlesOpen ? 45 : 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/15 bg-foreground/5 text-foreground/50 select-none transition-colors group-hover:border-foreground/30 group-hover:bg-foreground/10 group-hover:text-foreground/80"
+                className="flex h-8 w-8 items-center justify-center text-foreground/40 select-none transition-colors group-hover:text-foreground/80"
               >
                 <span className="text-xl leading-none">+</span>
               </motion.div>
