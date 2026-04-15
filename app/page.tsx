@@ -463,7 +463,7 @@ function PageContent() {
                   fontSize: "0.7rem",
                   fontWeight: 400,
                   letterSpacing: "0.08em",
-                  opacity: 0.4,
+                  opacity: 0.65,
                 } : {
                   fontSize: "1.25rem",
                   fontWeight: 600,
@@ -486,7 +486,7 @@ function PageContent() {
             </button>
             <motion.p
               initial={{ opacity: 1, height: "auto" }}
-              animate={{ opacity: principlesOpen ? 0 : 1, height: principlesOpen ? 0 : "auto" }}
+              animate={{ opacity: 1, height: "auto" }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="mt-1 text-sm text-muted overflow-hidden"
             >
