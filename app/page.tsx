@@ -455,8 +455,8 @@ function PageContent() {
               <motion.h2
                 initial={{
                   fontSize: "1.25rem",
-                  fontWeight: 600,
-                  letterSpacing: "-0.04em",
+                  fontWeight: 700,
+                  letterSpacing: "-0.06em",
                   opacity: 1,
                 }}
                 animate={principlesOpen ? {
@@ -466,8 +466,8 @@ function PageContent() {
                   opacity: 0.65,
                 } : {
                   fontSize: "1.25rem",
-                  fontWeight: 600,
-                  letterSpacing: "-0.04em",
+                  fontWeight: 700,
+                  letterSpacing: "-0.06em",
                   opacity: 1,
                 }}
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
