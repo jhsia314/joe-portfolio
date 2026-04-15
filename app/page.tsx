@@ -452,12 +452,30 @@ function PageContent() {
               onClick={() => setPrinciplesOpen(!principlesOpen)}
               className="flex w-full items-center justify-between group"
             >
-              <h2 className="font-mono text-xs uppercase tracking-widest text-muted/50">
+              <motion.h2
+                animate={principlesOpen ? {
+                  fontSize: "0.7rem",
+                  fontWeight: 400,
+                  letterSpacing: "0.15em",
+                  opacity: 0.4,
+                } : {
+                  fontSize: "1.25rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.02em",
+                  opacity: 1,
+                }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="uppercase text-foreground"
+              >
                 How I Operate
-              </h2>
-              <span className="font-mono text-xs text-muted/40 transition-colors group-hover:text-muted select-none">
-                {principlesOpen ? "−" : "+"}
-              </span>
+              </motion.h2>
+              <motion.span
+                animate={{ opacity: principlesOpen ? 0.4 : 0.5, rotate: principlesOpen ? 45 : 0 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="text-lg text-muted select-none"
+              >
+                +
+              </motion.span>
             </button>
           </FadeIn>
           <motion.div
