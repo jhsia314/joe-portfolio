@@ -195,7 +195,7 @@ export default function PhoneCarousel({
           type="button"
           aria-label="Previous screen"
           onClick={(e) => { e.stopPropagation(); paginate(-1); }}
-          className={`absolute left-4 md:left-5 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full backdrop-blur-xl shadow-lg transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${theme.arrowBg} ${cardTheme === "light" ? "text-[#1a1816]" : "text-white"} ${
+          className={`absolute left-4 md:left-5 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full backdrop-blur-xl shadow-lg transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${showFades ? `${theme.arrowBg} ${cardTheme === "light" ? "text-[#1a1816]" : "text-white"}` : "bg-black/20 border border-black/15 hover:bg-black/35 text-[#1a1816]"} ${
             isHovered ? "opacity-100 translate-x-0" : "opacity-30 md:opacity-0 md:-translate-x-1"
           }`}
         >
@@ -208,7 +208,7 @@ export default function PhoneCarousel({
           type="button"
           aria-label="Next screen"
           onClick={(e) => { e.stopPropagation(); paginate(1); }}
-          className={`absolute right-4 md:right-5 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full backdrop-blur-xl shadow-lg transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${theme.arrowBg} ${cardTheme === "light" ? "text-[#1a1816]" : "text-white"} ${
+          className={`absolute right-4 md:right-5 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full backdrop-blur-xl shadow-lg transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${showFades ? `${theme.arrowBg} ${cardTheme === "light" ? "text-[#1a1816]" : "text-white"}` : "bg-black/20 border border-black/15 hover:bg-black/35 text-[#1a1816]"} ${
             isHovered ? "opacity-100 translate-x-0" : "opacity-30 md:opacity-0 md:translate-x-1"
           }`}
         >
