@@ -453,6 +453,12 @@ function PageContent() {
               className="flex w-full items-center justify-between group"
             >
               <motion.h2
+                initial={{
+                  fontSize: "1.25rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.04em",
+                  opacity: 1,
+                }}
                 animate={principlesOpen ? {
                   fontSize: "0.7rem",
                   fontWeight: 400,
@@ -470,6 +476,7 @@ function PageContent() {
                 How I Operate
               </motion.h2>
               <motion.div
+                initial={{ rotate: 0 }}
                 animate={{ rotate: principlesOpen ? 45 : 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="flex h-8 w-8 items-center justify-center text-foreground/40 select-none transition-colors group-hover:text-foreground/80"
@@ -478,6 +485,7 @@ function PageContent() {
               </motion.div>
             </button>
             <motion.p
+              initial={{ opacity: 1, height: "auto" }}
               animate={{ opacity: principlesOpen ? 0 : 1, height: principlesOpen ? 0 : "auto" }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="mt-1 text-sm text-muted overflow-hidden"
