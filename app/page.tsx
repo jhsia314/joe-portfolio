@@ -482,7 +482,7 @@ function PageContent() {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="mt-1 text-sm text-muted overflow-hidden"
             >
-              The principles behind how I lead and build — turning complexity into direction, aligning teams around decisions, driving execution that scales.
+              Turns ambiguity into direction, aligns teams to decisions, and drives execution that scales.
             </motion.p>
           </FadeIn>
           <motion.div
