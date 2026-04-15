@@ -39,6 +39,15 @@ export default function RootLayout({
       data-theme="light"
       className={`${satoshi.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Blocking script: apply saved theme before first paint to avoid flash */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          try {
+            var t = localStorage.getItem('theme');
+            if (t) document.documentElement.setAttribute('data-theme', t);
+          } catch(e) {}
+        `}} />
+      </head>
      <body className="min-h-full flex flex-col">
   <Providers>
     {children}

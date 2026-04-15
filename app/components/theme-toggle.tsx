@@ -5,13 +5,13 @@ import posthog from "posthog-js";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const saved = localStorage.getItem("theme") as "light" | "dark" | null;
-    const resolved = saved ?? "dark";
+    const resolved = saved ?? "light";
     setTheme(resolved);
     document.documentElement.setAttribute("data-theme", resolved);
   }, []);
