@@ -460,7 +460,11 @@ function PageContent() {
         <section className="mt-10">
           <FadeIn>
             <button
-              onClick={() => setPrinciplesOpen(!principlesOpen)}
+              onClick={() => {
+                const next = !principlesOpen;
+                setPrinciplesOpen(next);
+                posthog.capture('how_i_operate_toggled', { expanded: next });
+              }}
               className="flex w-full items-center justify-between group"
             >
               <motion.h2
@@ -487,12 +491,13 @@ function PageContent() {
                 How I Operate
               </motion.h2>
               <motion.div
-                initial={{ rotate: 0 }}
-                animate={{ rotate: principlesOpen ? 45 : 0 }}
+                animate={{ rotate: principlesOpen ? 180 : 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="flex h-8 w-8 items-center justify-center text-foreground/40 select-none transition-colors group-hover:text-foreground/80"
+                className="flex h-8 w-8 items-center justify-center text-foreground/40 select-none transition-colors group-hover:text-foreground/70"
               >
-                <span className="text-xl leading-none">+</span>
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
               </motion.div>
             </button>
             <motion.p

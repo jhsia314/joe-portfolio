@@ -266,7 +266,7 @@ export default function PhoneCarousel({
             </h4>
           )}
           {description && (
-            <p className="mt-1 text-xs md:text-sm text-muted leading-relaxed">
+            <p className="mt-1 text-sm text-muted leading-relaxed">
               {description}
             </p>
           )}
