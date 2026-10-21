@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Joe Hsia, Design Leader",
   description:
-    "22 years building products and design organizations at Google, Meta, Yahoo, and enterprise SaaS. Currently VP of Product Design at Safe Security.",
+    "22 years building products and design organizations at Google, Meta, Yahoo, and enterprise SaaS. Currently Sr. Director, Product Design (AI) at HackerOne, leading design for AI-powered security experiences.",
 };
 
 export default function RootLayout({
