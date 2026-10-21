@@ -416,9 +416,9 @@ function PageContent() {
             </LineReveal>
             <LineReveal delay={0.7}>
               <p className="text-base md:text-lg leading-relaxed text-muted max-w-2xl">
-                Currently VP of Product Design and Creatives at{" "}
+                Currently Sr. Director, Product Design (AI) at{" "}
                 <motion.a
-                  href="https://safe.security"
+                  href="https://www.hackerone.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
@@ -426,9 +426,13 @@ function PageContent() {
                   transition={{ duration: 0.2 }}
                   data-hover="true"
                 >
-                  Safe Security
+                  HackerOne
                 </motion.a>
-                , leading AI-native product experiences for cybersecurity.
+                . I lead design for AI-powered security experiences, connecting complex
+                capabilities into clear customer workflows. I partner with Product
+                and Engineering to shape product direction, develop the design
+                team, and build shared design foundations, bringing ideas through
+                prototyping, customer feedback, and delivery.
               </p>
             </LineReveal>
           </div>
