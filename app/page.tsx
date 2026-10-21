@@ -400,7 +400,7 @@ function PageContent() {
           <div className="mt-3 overflow-hidden">
             <LineReveal delay={0.5}>
               <span className="font-mono text-sm uppercase tracking-widest text-muted">
-                Design Leadership, Consumer &amp; Enterprise
+                Design Leadership, Consumer, Enterprise, &amp; AI
               </span>
             </LineReveal>
           </div>
